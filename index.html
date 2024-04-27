@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eco-Conscious Product Reviews</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #f4f4f9;
+        color: #333;
+      }
+      header {
+        background: #008a63;
+        color: #fff;
+        padding: 10px 20px;
+        text-align: center;
+      }
+      nav {
+        background: #006747;
+        display: flex;
+        justify-content: center;
+        padding: 10px 0;
+      }
+      nav a {
+        color: white;
+        padding: 10px 15px;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      nav a:hover {
+        background: #004d33;
+      }
+      section {
+        margin: 20px;
+        padding: 20px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      h2 {
+        color: #008a63;
+      }
+      img {
+        width: 100px;
+        height: auto;
+      }
+      .hidden {
+        display: none;
+      }
+      .product {
+        border-bottom: 1px solid #eee;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+      }
+      .product:last-child {
+        border-bottom: none;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Eco-Conscious Product Reviews</h1>
+      <p style="color: rgb(255, 255, 255); background-color: rgb(0, 138, 99);">
+        Discover products that are both eco-friendly and high quality.
+        </p>
+    </header>
+
+    <nav>
+      <a href="#home" id="homeLink">Home</a>
+      <a href="#products" id="productsLink">Products</a>
+      <a href="#about" id="aboutLink">About Us</a>
+      <a href="#contact" id="contactLink">Contact</a>
+    </nav>
+
+    <section id="reviews">
+      <!-- Product reviews will be dynamically inserted here -->
+    </section>
+
+    <script>
+      document.getElementById('homeLink').addEventListener('click', function(event) {
+          event.preventDefault();
+          document.getElementById('reviews').innerHTML = `
+        <h2>Welcome to Eco-Conscious Product Reviews</h2>
+        <p>At Eco-Conscious Product Reviews, we're dedicated to helping you make sustainable choices with ease. Our expert reviews and insights provide you with the information needed to choose products that are not only good for you but also for the planet.</p>
+        <div style="text-align:center;">
+            <img src="images/ecolifestyle.jpg" alt="Eco Friendly" style="width:auto; max-width:100%; height:auto; margin-top:20px;">
+        </div>
+        <h3>Our Mission</h3>
+        <p>Our mission is to inspire and empower consumers to make environmentally conscious decisions by providing trustworthy and comprehensive product reviews.</p>
+        <h3>Why Choose Us?</h3>
+        <ul>
+            <li><strong>Trustworthy Reviews:</strong> Each product is rigorously tested and reviewed by our experts.</li>
+            <li><strong>Community Focused:</strong> We listen to our community and provide reviews on products you are interested in.</li>
+            <li><strong>Eco-friendly Choices:</strong> Discover products that reduce your carbon footprint and promote sustainability.</li>
+        </ul>
+        <h3>Featured Reviews</h3>
+        <p>Check out our top picks this month for eco-friendly products that are a must-have for any environmentally conscious household:</p>
+        <!-- You might dynamically load some featured reviews here -->
+    `;;
+      });
+
+      document.getElementById('productsLink').addEventListener('click', function(event) {
+          event.preventDefault();
+          loadProducts();
+      });
+
+      document.getElementById('aboutLink').addEventListener('click', function(event) {
+          event.preventDefault();
+          loadAboutUs();
+      });
+
+      document.getElementById('contactLink').addEventListener('click', function(event) {
+          event.preventDefault();
+          loadContact();
+      });
+
+      function loadProducts() {
+          var products = [
+              {
+                  name: "Bamboo Toothbrush",
+                  description: "Eco-friendly bamboo toothbrush.",
+                  image: "images/bambootoothbrush.jpg",
+                  reviews: [
+                      { rating: 4, text: "Great toothbrush, feels good and lasts long!", reviewer: "Alice" }
+                  ]
+              },
+              {
+                  name: "Reusable Water Bottle",
+                  description: "Durable and stylish water bottle.",
+                  image: "images/water-bottle.jpg",
+                  reviews: [
+                      { rating: 5, text: "Perfect for my daily hydration needs.", reviewer: "Bob" }
+                  ]
+              },
+              {
+                  name: "Organic Cotton T-shirt",
+                  description: "Soft and sustainable cotton t-shirt.",
+                  image: "images/cotton-tshirt.jpg",
+                  reviews: [
+                      { rating: 3, text: "Comfortable but shrinks slightly after wash.", reviewer: "Carol" }
+                  ]
+              }
+          ];
+
+          var container = document.getElementById('reviews');
+          container.innerHTML = ''; // Clear previous content
+          products.forEach(function(product) {
+              var productDiv = document.createElement('div');
+              productDiv.className = 'product';
+              productDiv.innerHTML = `
+                  <h2>${product.name}</h2>
+                  <<img src="${product.image}" alt="${product.name}" style="max-width:100px; height:auto;">
+                  <p>${product.description}</p>
+                  <button onclick="toggleReviews(this.nextElementSibling)">Show Reviews</button>
+                  <div class="hidden">
+                      ${product.reviews.map(review => `
+                          <p>Rating: ${'★'.repeat(review.rating)} (${review.rating})</p>
+                          <p>${review.text}</p>
+                          <p>Review by: ${review.reviewer}</p>
+                      `).join('')}
+                  </div>
+              `;
+              container.appendChild(productDiv);
+          });
+      }
+
+      function loadAboutUs() {
+          var container = document.getElementById('reviews');
+          container.innerHTML = `
+              <h2>About Us</h2>
+              <img src="images/aboutus.jpg" alt="Our Team" style="width: 100px; height: auto;">
+              <p>We are committed to promoting eco-friendly products that help reduce environmental impact and promote sustainable living. Our team reviews and recommends products based on their eco-friendliness, effectiveness, and customer satisfaction.</p>
+              <p>Our journey began with a shared passion for the environment and a desire to make a difference. As avid advocates for sustainable living, we realized the need for a platform that not only highlights eco-friendly products but also provides reliable reviews and insights to help consumers make informed choices.</p>
+        <p>Through our rigorous research and testing processes, we curate a selection of the best eco-conscious products on the market, ensuring that each recommendation aligns with our values of sustainability, quality, and integrity.</p>
+        <p>Join us in our mission to create a greener, cleaner future for generations to come. Together, we can make a difference—one eco-friendly product at a time.</p>
+        <p>Meet the dedicated team behind Eco-Conscious Product Reviews:</p>
+        <ul>
+            <li>Divya - Founder & CEO</li>
+            <li>Keerthi - Product Researcher</li>
+            <li>Michael - Content Writer</li>
+        </ul>
+          `;
+      }
+
+      function loadContact() {
+          var container = document.getElementById('reviews');
+          container.innerHTML = `
+              <h2>Contact Us</h2>
+              <p>Have questions or want to get in touch with us? Email us at <a href="mailto:info@ecoreviews.com">info@ecoreviews.com</a> or call us at (123) 456-7890.</p>
+          `;
+      }
+
+      function toggleReviews(reviewsDiv) {
+          if (reviewsDiv.style.display === 'none' || reviewsDiv.style.display === '') {
+              reviewsDiv.style.display = 'block';
+              reviewsDiv.previousElementSibling.textContent = 'Hide Reviews';
+          } else {
+              reviewsDiv.style.display = 'none';
+              reviewsDiv.previousElementSibling.textContent = 'Show Reviews';
+          }
+      }
+    </script>
+  </body>
+</html>
